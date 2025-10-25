@@ -1,0 +1,31 @@
+syntax="proto3";
+
+package ekg.client_proto.v1;
+
+message ClientConnectionBlip {
+  enum Blip {
+    HELLO = 0;
+    NOT_HELLO = 1;
+  }
+  Blip hello = 1;
+}
+
+message ServerConnectionStatus {
+  enum ServerConnectionStatus {
+    CONNECTION_SUCCESSFUL = 0;
+    CONNECTION_UNSUCCESSFUL = 1;
+  }
+  ServerConnectionStatus status = 1;
+  uint32 initial_batch = 2;
+  uint32 initial_rate = 3;
+}
+
+message Data {
+  repeated uint32 raw_data = 1 [packed=true];
+  enum LeadConnectionStatus {
+    LEADS_CONNECTED = 0;
+    LEADS_NOT_CONNECTED = 1;
+  }
+  repeated LeadConnectionStatus status = 2 [packed=true];
+  uint64 sequence = 3;
+}
