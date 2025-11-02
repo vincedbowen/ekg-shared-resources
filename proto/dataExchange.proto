@@ -1,6 +1,6 @@
 syntax="proto3";
 
-package ekg.client_proto.v1;
+package ekg.proto.v1;
 
 message ClientConnectionBlip {
   enum Blip {
@@ -29,3 +29,18 @@ message Data {
   repeated LeadConnectionStatus status = 2 [packed=true];
   uint64 sequence = 3;
 }
+
+message Ack {
+  enum Command {
+    OK = 0;
+    PAUSE = 1;
+    RESUME = 3;
+    SET_BATCH = 4;
+    SET_RATE = 5;
+    STOP = 6;
+  }
+  Command cmd = 1;
+  optional uint32 new_batch = 2;
+  optional uint32 new_rate = 3;
+}
+
