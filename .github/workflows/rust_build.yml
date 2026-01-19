@@ -28,4 +28,4 @@ jobs:
           sudo apt-get install -y protobuf-compiler
 
       - name: Build
-        run: cargo build --release
+        run: cd rust/proto && cargo build --release
