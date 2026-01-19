@@ -28,7 +28,7 @@ message ServerHandshake {
 * Message represents a message from the client containing relevant ekg data
 * and other important status fields
 */
-message Message {
+message ClientMessage {
     enum LeadConnectionStatus {
       LEADS_CONNECTED = 0;
       LEADS_NOT_CONNECTED = 1;
