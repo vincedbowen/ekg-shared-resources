@@ -1,0 +1,54 @@
+syntax="proto3";
+
+package ekg.proto.v0;
+
+/**
+* Client handshake represents an initial message from the client as 
+* an application level handshake
+*/
+message ClientHandshake {
+  string schema_fingerprint = 1;
+  // In Hz
+  uint32 initial_rate = 2;
+  string name = 3;
+}
+
+/**
+* Server handshake represents an initial response from the server
+* as an application level handshake
+*/
+message ServerHandshake {
+  bool accepted = 1;
+  // In Hz
+  uint32 negotiated_rate = 2;
+  optional string error_message = 3;
+}
+
+/**
+* Message represents a message from the client containing relevant ekg data
+* and other important status fields
+*/
+message Message {
+    enum LeadConnectionStatus {
+      LEADS_CONNECTED = 0;
+      LEADS_NOT_CONNECTED = 1;
+    }
+    double data = 1;
+    LeadConnectionStatus status = 2;
+    // Termination from client side
+    optional bool terminating = 3;
+}
+
+/**
+* Message ack is an application level acknowledgement of reception with a
+* command telling client how to proceed
+*/
+message MessageAck {
+  enum Command {
+    OK = 0;
+    PAUSE = 1;
+    RESUME = 2;
+    STOP = 3;
+  }
+  Command cmd = 1;
+}
