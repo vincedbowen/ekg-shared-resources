@@ -16,6 +16,7 @@ set(PROTO_FILE "${PROTO_DIR}/data.proto")
 
 set(Protobuf_IMPORT_DIRS "${PROTO_DIR}")
 
+# TODO: Need to use nanopb somehow here instead of generate cpp
 protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS "${PROTO_FILE}")
 
 add_library(ekg_proto STATIC ${PROTO_SRCS} ${PROTO_HDRS})
